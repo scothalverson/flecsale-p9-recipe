@@ -22,6 +22,7 @@ spack install parmetis%gcc@8.3.1 ^openmpi@4.0.2 thread_multiple=True
 `spack module tcl loads | grep "load netcdf-c-"`
 `spack module tcl loads | grep "load netcdf-cxx"`
 `spack module tcl loads | grep "load openmpi-4.0.2-gcc"`
+`spack module tcl loads | grep "load gasnet-1.32.0-gcc"`
 
 #if we're rerunning this script, we don't want to depend on anything that might already be in the install dir
 rm -rf install
@@ -54,6 +55,7 @@ mkdir build
 cd build
 cmake .. \
 	-DCMAKE_CXX_COMPILER=clang++ \
+	-DCMAKE_CXX_FLAGS="$CMAKE_CXX_FLAGS -fPIC" \
 	-DCMAKE_C_COMPILER=clang \
 	-DCMAKE_INSTALL_PREFIX=$curdir/install/ \
 	-DKokkos_ARCH_POWER9:BOOL=ON \
@@ -67,7 +69,10 @@ make install
 
 cd ../../
 
+
 #legion
+export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:$curdir/install/
+echo $CMAKE_PREFIX_PATH
 rm -rf legion
 git clone git@gitlab.com:StanfordLegion/legion.git
 cd legion
