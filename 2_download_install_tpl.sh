@@ -81,8 +81,9 @@ cmake .. \
 	-DCMAKE_C_COMPILER=clang \
 	-DCMAKE_INSTALL_PREFIX=$curdir/install/ \
 	-DBUILD_SHARED_LIBS=ON \
-	-DLEGION_USE_CUDA=ON \
-	-DLEGION_USE_GASnet=ON
+	-DLegion_USE_CUDA=ON \
+	-DLegion_USE_Kokkos=ON \
+	-DLegion_USE_GASNet=ON
 
 make -j
 make install
