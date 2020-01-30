@@ -33,7 +33,7 @@ cmake .. \
 	-DCMAKE_CXX_COMPILER=clang++ \
 	-DCMAKE_C_COMPILER=clang \
 	-DCMAKE_CXX_FLAGS:STRING="-frelaxed-template-template-args --cuda-path=/usr/tce/packages/cuda/cuda-10.1.243/ --cuda-gpu-arch=sm_70" \
-	-DCMAKE_EXE_LINKER_FLAGS:STRING="-lboost_program_options -lz --cuda-path=/usr/tce/packages/cuda/cuda-10.1.243/ --cuda-gpu-arch=sm_70 -lmpi_cxx -L$installdir/lib64 -lkokkoscore -L/usr/tce/packages/cuda/cuda-10.1.243/lib64 -lcudart" \
+	-DCMAKE_EXE_LINKER_FLAGS:STRING="-lboost_program_options -lz --cuda-path=/usr/tce/packages/cuda/cuda-10.1.243/ --cuda-gpu-arch=sm_70 -lmpi_cxx -L$installdir/lib64 -lkokkoscore" \
 	-DCXX_CONFORMANCE_STANDARD:STRING=c++17 \
 	-DEXODUSII_INCLUDE_DIR:PATH=$installdir/include \
 	-DEXODUSII_LIBRARY:FILEPATH=$installdir/lib/libexodus.a \
