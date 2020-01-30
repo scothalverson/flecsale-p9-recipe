@@ -34,7 +34,11 @@ tar -xvf exodus-6.09.tar.gz
 cd exodus-6.09/exodus/
 mkdir build
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX:PATH=$curdir/install -DPYTHON_INSTALL=$curdir/install
+cmake .. \
+	-DCMAKE_INSTALL_PREFIX:PATH=$curdir/install \
+	-DPYTHON_INSTALL=$curdir/install \
+	-DCMAKE_CXX_COMPILER=clang++ \
+	-DCMAKE_C_COMPILER=clang 
 make 
 make install
 
