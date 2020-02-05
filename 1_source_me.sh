@@ -18,11 +18,11 @@ command -v spack >/dev/null 2>&1 || {
 #spack load llvm@develop%gcc@8.3.1
 
 #detect clang, and install it if not found
-clang++ --version | grep -q "11.0.0" >/dev/null 2>&1 || { 
+clang++ --version | grep -q "10.0.0" >/dev/null 2>&1 || { 
 	#put the expected path in your PATH variable
 	export PATH=$PWD/llvm/install/ppc64le/bin:$PATH
 	#then try again, and if still not there, install it
-	clang++ --version | grep -q "11.0.0" 2>&1 || { 
+	clang++ --version | grep -q "10.0.0" 2>&1 || { 
 		./clangInstall.sh
 	}
 }

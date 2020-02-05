@@ -19,12 +19,19 @@ fi
 
 #set up some more directories
 cd llvm-project
-git checkout master
+git checkout -b release/10.x origin/release/10.x
+
 mkdir -p build-$(uname -p)
 cd build-$(uname -p)
 
 #configure llvm to build a release with clang using gcc
-cmake -DLLVM_CXX_STD:STRING=c++14 -DCMAKE_USE_RELATIVE_PATHS:BOOL=OFF -DLLVM_ENABLE_PROJECTS="clang;compiler-rt" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX=../../install/$(uname -p) CXX=g++ CC=gcc  -G "Unix Makefiles" ../llvm
+cmake CXX=g++ CC=gcc  -G "Unix Makefiles" \
+	-DLLVM_CXX_STD:STRING=c++17  \
+	-DCMAKE_USE_RELATIVE_PATHS:BOOL=OFF \
+	-DLLVM_ENABLE_PROJECTS="clang;compiler-rt" \
+	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
+	-DCMAKE_INSTALL_PREFIX=../../install/$(uname -p) \
+	../llvm
 
 #build then install
 make -j40

@@ -24,6 +24,9 @@ spack install parmetis%gcc@8.3.1 ^openmpi@4.0.2 thread_multiple=True
 `spack module tcl loads | grep "load openmpi-4.0.2-gcc"`
 `spack module tcl loads | grep "load gasnet-1.32.0-gcc"`
 
+#if we've just installed spack, rerunning the setup process can help if packages can't be found
+source ./spack/share/spack/setup-env.sh
+
 #if we're rerunning this script, we don't want to depend on anything that might already be in the install dir
 rm -rf install
 
@@ -62,6 +65,7 @@ cmake .. \
 	-DKokkos_ARCH_VOLTA70:BOOL=ON \
 	-DKokkos_ENABLE_CUDA:BOOL=ON \
 	-DKokkos_ENABLE_CUDA_CONSTEXPR=ON \
+	-DKokkos_ENABLE_CUDA_UVM=ON \
 	-DKokkos_ENABLE_CUDA_LAMBDA=ON 
 
 make -j
