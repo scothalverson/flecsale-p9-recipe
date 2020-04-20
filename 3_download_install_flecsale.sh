@@ -39,19 +39,20 @@ spack load -r seacas cgns=False ^$mpistring
 
 seacasdir=`python -c "print [x for x in '$CMAKE_PREFIX_PATH'.split(':') if 'seacas' in x][0]"`
 hdf5dir=`python -c "print [x for x in '$CMAKE_PREFIX_PATH'.split(':') if 'hdf5' in x][0]"`
+ncdfcdir=`python -c "print [x for x in '$CMAKE_PREFIX_PATH'.split(':') if 'netcdf-c' in x][0]"`
 echo $seacasdir
 cmake .. \
 	-DCMAKE_CXX_COMPILER=clang++ \
 	-DCMAKE_C_COMPILER=clang \
 	-DCMAKE_CXX_FLAGS:STRING="-frelaxed-template-template-args --cuda-path=/usr/tce/packages/cuda/cuda-10.1.243/ --cuda-gpu-arch=sm_70" \
-	-DCMAKE_EXE_LINKER_FLAGS:STRING="-L$hdf5dir/lib/ -lhdf5 -lpnetcdf -lnetcdf -lboost_program_options -lz --cuda-path=/usr/tce/packages/cuda/cuda-10.1.243/ --cuda-gpu-arch=sm_70  -L$installdir/lib64 -lkokkoscore" \
+	-DCMAKE_EXE_LINKER_FLAGS:STRING="-L$hdf5dir/lib/ -lpnetcdf -lnetcdf -lboost_program_options -lz --cuda-path=/usr/tce/packages/cuda/cuda-10.1.243/ --cuda-gpu-arch=sm_70 -L$installdir/lib64 -lkokkoscore" \
 	-DCXX_CONFORMANCE_STANDARD:STRING=c++17 \
 	-DLegion_INCLUDE_DIR=$installdir/include/ \
 	-DLegion_LIBRARY=$installdir/lib64/liblegion.so \
 	-DREALM_LIBRARY=$installdir/lib64/librealm.so \
 	-DFLECSI_ENABLE_KOKKOS=ON \
 	-DEXODUSII_INCLUDE_DIR=$seacasdir/include \
-	-DEXODUSII_LIBRARY=$seacasdir/lib/libexodus.a \
+	-DEXODUSII_LIBRARY=$seacasdir/lib/libexodus.so \
 	-DENABLE_FLECSI_TUTORIAL=OFF \
 	-DENABLE_HDF5=ON
 
