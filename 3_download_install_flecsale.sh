@@ -43,7 +43,7 @@ cmake .. \
 	-DCMAKE_CXX_COMPILER=clang++ \
 	-DCMAKE_C_COMPILER=clang \
 	-DCMAKE_CXX_FLAGS:STRING="-frelaxed-template-template-args --cuda-path=/usr/tce/packages/cuda/cuda-10.1.243/ --cuda-gpu-arch=sm_70" \
-	-DCMAKE_EXE_LINKER_FLAGS:STRING="-lboost_program_options -lz --cuda-path=/usr/tce/packages/cuda/cuda-10.1.243/ --cuda-gpu-arch=sm_70  -L$installdir/lib64 -lkokkoscore" \
+	-DCMAKE_EXE_LINKER_FLAGS:STRING="-lpnetcdf -lnetcdf -lhdf5 -lboost_program_options -lz --cuda-path=/usr/tce/packages/cuda/cuda-10.1.243/ --cuda-gpu-arch=sm_70  -L$installdir/lib64 -lkokkoscore" \
 	-DCXX_CONFORMANCE_STANDARD:STRING=c++17 \
 	-DLegion_INCLUDE_DIR=$installdir/include/ \
 	-DLegion_LIBRARY=$installdir/lib64/liblegion.so \
@@ -51,7 +51,8 @@ cmake .. \
 	-DFLECSI_ENABLE_KOKKOS=ON \
 	-DEXODUSII_INCLUDE_DIR=$seacasdir/include \
 	-DEXODUSII_LIBRARY=$seacasdir/lib/libexodus.a \
-	-DENABLE_FLECSI_TUTORIAL=OFF
+	-DENABLE_FLECSI_TUTORIAL=OFF \
+	-DENABLE_HDF5=ON
 
-make -j
+make 
 
